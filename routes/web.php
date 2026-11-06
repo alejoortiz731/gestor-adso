@@ -5,4 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', '/aprendices');
 
-Route::resource('aprendices', AprendizController::class);
+Route::resource('aprendices', AprendizController::class)
+    ->except(['show'])
+    ->parameters(['aprendices' => 'aprendiz']);
+    
