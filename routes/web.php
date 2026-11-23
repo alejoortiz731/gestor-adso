@@ -1,11 +1,14 @@
 <?php
 
-use App\Http\Controllers\AprendizController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AprendizController;
 
 Route::redirect('/', '/aprendices');
 
-Route::resource('aprendices', AprendizController::class)
-    ->except(['show'])
-    ->parameters(['aprendices' => 'aprendiz']);
-    
+Route::middleware(['auth'])->group(function () {
+    Route::resource('aprendices', AprendizController::class)
+        ->parameters(['aprendices' => 'aprendiz'])
+        ->except(['show']);
+});
+
+require __DIR__.'/auth.php';
